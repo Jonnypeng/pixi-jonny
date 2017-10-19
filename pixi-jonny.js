@@ -12,8 +12,34 @@ class button extends PIXI.Sprite{
   }
 };
 
-/* 设置背景的移动方案，上中下进行循环移动，需要添加在Ticker上进行RAF循环*/
 
+/*创建隐藏的图片并且包含位置移动*/
+class aniReady extends PIXI.Sprite{
+  constructor(imgID,originx,originy,dx,dy,alpha){
+    super();
+    this.texture = new PIXI.Texture.fromImage(imgID);
+    this.x = originX;
+    this.y = originY;
+    this.dx = dirX;
+    this.dy = dirY;
+    this.alpha = alpha;
+  }
+  stageAdd (){
+    app.stage,addChild(this);
+  }
+  tween (){
+    new TweenMax(this,1,{
+      x:this.dx,
+      y:this.dy,
+      alpha:1
+    });
+  }
+};
+
+
+
+
+/* 设置背景的移动方案，上中下进行循环移动，需要添加在Ticker上进行RAF循环*/
 function bgRun(obj,dir){
   if(!obj.bot){
     obj.bot = {};
@@ -33,7 +59,6 @@ function bgRun(obj,dir){
 
 
 /*control layer 设置角色不能溢出到屏幕之外*/
-
 function dragOutSide(obj){
   if(obj.x<=0 + obj.width / 2){
     obj.x = 0 + obj.width / 2;
