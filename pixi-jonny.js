@@ -28,10 +28,6 @@ class aniReady extends PIXI.Sprite{
 
 /* 设置背景的移动方案，上中下进行循环移动，需要添加在Ticker上进行RAF循环*/
 function bgRun(obj,dir){
-  if(!obj.bot){
-    obj.bot = {};
-    obj.bot.y = 0;
-  }
   obj.top.y += dir;
   obj.mid.y += dir;
   obj.bot.y += dir;
@@ -43,6 +39,19 @@ function bgRun(obj,dir){
     obj.top.y = obj.eHeight*-1;
   };
 }
+
+
+/* 设置背景的移动方案，上中进行循环移动，需要添加在Ticker上进行RAF循环*/
+function bg2Run(obj,dir){
+  obj.top.y += dir;
+  obj.mid.y += dir;
+  if(obj.mid.y>=obj.limitY){
+    obj.mid.y = obj.eHeight*-1;
+  }else if(obj.top.y>=obj.limitY){
+    obj.top.y = obj.eHeight*-1;
+  };
+}
+
 
 
 /*control layer 设置角色不能溢出到屏幕之外*/
