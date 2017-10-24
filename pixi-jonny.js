@@ -1,3 +1,5 @@
+
+
 /* view layer 常规的按钮*/
 class button extends PIXI.Sprite{
   constructor(imgID,x,y){
